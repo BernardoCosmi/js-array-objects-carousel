@@ -105,7 +105,7 @@ carouselData.forEach((item, index) =>{
   });
 
   prevButton.addEventListener('click', function () {
-    // Cambio l'indice per visualizzare l'immagine giusta
+    // Cambio l'indice per visualizzare l'immagine giusta, facendo in modo che rimanga sempre ni limiti dell'array
     currentIndex = (currentIndex - 1 + carouselData.length) % carouselData.length;
 
     // Nascondo tutte le altre immagini
@@ -123,6 +123,16 @@ nextButton.addEventListener('click', function () {
         image.style.display = index === currentIndex ? 'block' : 'none';
     });
 });
+
+//ANCHOR Funzione di autoscorrimento
+setInterval(function () {
+    currentIndex = (currentIndex + 1) % carouselData.length;
+
+    const allImages = document.querySelectorAll('.carouselItem');
+    allImages.forEach((image, index) => {
+      image.style.display = index === currentIndex ? 'block' : 'none';
+    });
+  }, 3000);
 
 
 
