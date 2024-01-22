@@ -54,8 +54,8 @@ const carouselData = [
 //Dichiaro anche altre variabili che potrebbero tornarmi utili
 const carouselContainer = document.getElementById('carousel');
 const iconContainer = document.getElementById('carouselIcon');
-const prevButton = document.getElementById('prevButton');
-const nextButton = document.getElementById('nextButton');
+const prevButtonHTML = document.getElementById('prevButton');
+const nextButtonHTML = document.getElementById('nextButton');
 
 let currentIndex=0;
 
@@ -104,7 +104,7 @@ carouselData.forEach((item, index) =>{
     iconContainer.appendChild(iconItem);
   });
 
-  prevButton.addEventListener('click', function () {
+  prevButtonHTML.addEventListener('click', function () {
     // Cambio l'indice per visualizzare l'immagine giusta, facendo in modo che rimanga sempre ni limiti dell'array
     currentIndex = (currentIndex - 1 + carouselData.length) % carouselData.length;
 
@@ -115,7 +115,7 @@ carouselData.forEach((item, index) =>{
     });
 });
 
-nextButton.addEventListener('click', function () {
+nextButtonHTML.addEventListener('click', function () {
     currentIndex = (currentIndex + 1) % carouselData.length;
 
     const allImg = document.querySelectorAll('.carouselItem');
@@ -125,7 +125,7 @@ nextButton.addEventListener('click', function () {
 });
 
 //ANCHOR Funzione di autoscorrimento
-setInterval(function () {
+var autoplayInterval = setInterval(function () {
     currentIndex = (currentIndex + 1) % carouselData.length;
 
     const allImages = document.querySelectorAll('.carouselItem');
@@ -133,6 +133,12 @@ setInterval(function () {
       image.style.display = index === currentIndex ? 'block' : 'none';
     });
   }, 3000);
+
+//ANCHOR Stop Button
+const stopButtonHTML=document.getElementById('stopButton')
+stopButtonHTML.addEventListener('click', function() {
+  clearInterval(autoplayInterval)
+});
 
 
 
