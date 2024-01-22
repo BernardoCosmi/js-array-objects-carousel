@@ -22,32 +22,32 @@ const carouselData = [
     {
       url: './assets/img/AOT1.jpg',
       title: 'Attack On Titan',
-      description: 'Captain Levi from Attack on Titan',
+      description: 'Levi Ackerman',
     },
     {
       url: './assets/img/AOT2.png',
       title: 'Attack On Titan',
-      description: 'Eren Jaeger from Attack on Titan',
+      description: 'Eren Jaeger',
     },
     {
       url: './assets/img/DN2.jpg',
       title: 'Death Note',
-      description: 'Light Yagami from Death Note',
+      description: 'Light Yagami',
     },
     {
       url: './assets/img/JK2.jpg',
       title: 'Jujutsu Kaisen',
-      description: 'Satoru Gojo from Jujutsu Kaisen',
+      description: 'Satoru Gojo',
     },
     {
       url: './assets/img/SAO2.jpg',
       title: 'Sword Art Online',
-      description: 'Kirito from Sword Art Online',
+      description: 'Kirigaya Kazuto (Kirito) ',
     },
     {
       url: './assets/img/TG2.jpg',
       title: 'Tokyo Ghoul',
-      description: 'Ken Kaneki from Tokyo Ghoul',
+      description: 'Ken Kaneki',
     },
   ];
 
@@ -70,13 +70,24 @@ carouselData.forEach((item, index) =>{
     //vedo una sola immagine principale in base alla sua posizione nell'array
     carouselItem.style.display = index === currentIndex ? 'block' : 'none';
 
-    //creo effettivamente l'immagine centrale
+    //Genero l'immagine centrale
     const img = document.createElement('img');
     img.src = item.url;
     img.alt = item.title;
+    
+    //Genero un elemento per la descrizione
+    const description = document.createElement('h2');
+    description.textContent = item.description;
+    
+    //Genero un elemento per il titolo
+    const title = document.createElement('p');
+    title.textContent = item.title;
 
-    //Appendo l'immagine centrale nel div
+    //Appendo l'immagine, il titolo e la descrizione
     carouselItem.appendChild(img);
+    carouselItem.appendChild(description);
+    carouselItem.appendChild(title);
+
 
     //Appendo il div così da visualizzare il tutto
     carouselContainer.appendChild(carouselItem);
@@ -92,7 +103,6 @@ carouselData.forEach((item, index) =>{
     iconItem.appendChild(iconImg);
     iconContainer.appendChild(iconItem);
   });
-
 
   prevButton.addEventListener('click', function () {
     // Cambio l'indice per visualizzare l'immagine giusta
