@@ -102,7 +102,19 @@ carouselData.forEach((item, index) =>{
     iconImg.alt = item.title;
     iconItem.appendChild(iconImg);
     iconContainer.appendChild(iconItem);
-  });
+    console.log(iconImg.src)
+
+  
+  //ANCHOR Funzione di apertura da miniature
+  iconItem.addEventListener('click', function () {
+    currentIndex=index;
+    
+    const allImages = document.querySelectorAll('.carouselItem');
+    allImages.forEach((image, i) => {
+      image.style.display = i === index ? 'block' : 'none';
+    });
+  })
+});
 
   prevButtonHTML.addEventListener('click', function () {
     // Cambio l'indice per visualizzare l'immagine giusta, facendo in modo che rimanga sempre ni limiti dell'array
@@ -152,7 +164,7 @@ invertButtonHTML.addEventListener('click', function() {
 
   invertedAutoplay = setInterval(function() {
     const allImages = document.querySelectorAll('.carouselItem');
-    
+
     if(currentIndex===0){
       allImages.forEach((image, index) => {
         image.style.display = index === currentIndex ? 'block' : 'none';
