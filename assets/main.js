@@ -17,37 +17,103 @@ Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi)
 BONUS 3:
 Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.*/
 
+//Creo l'array di oggetti
 const carouselData = [
     {
-      url: './img/AOT1.jpg',
+      url: './assets/img/AOT1.jpg',
       title: 'Attack On Titan',
       description: 'Captain Levi from Attack on Titan',
     },
     {
-      url: './img/AOT2.png',
+      url: './assets/img/AOT2.png',
       title: 'Attack On Titan',
       description: 'Eren Jaeger from Attack on Titan',
     },
     {
-      url: './img/DN2.jpg',
+      url: './assets/img/DN2.jpg',
       title: 'Death Note',
       description: 'Light Yagami from Death Note',
     },
     {
-      url: './img/JK2.jpg',
+      url: './assets/img/JK2.jpg',
       title: 'Jujutsu Kaisen',
       description: 'Satoru Gojo from Jujutsu Kaisen',
     },
     {
-      url: './img/SAO2.jpg',
+      url: './assets/img/SAO2.jpg',
       title: 'Sword Art Online',
       description: 'Kirito from Sword Art Online',
     },
     {
-      url: './img/TG2.jpg',
+      url: './assets/img/TG2.jpg',
       title: 'Tokyo Ghoul',
       description: 'Ken Kaneki from Tokyo Ghoul',
     },
   ];
+
+//Dichiaro anche altre variabili che potrebbero tornarmi utili
+const carouselContainer = document.getElementById('carousel');
+const iconContainer = document.getElementById('carouselIcon');
+const prevButton = document.getElementById('prevButton');
+const nextButton = document.getElementById('nextButton');
+
+let currentIndex=0;
+
+//Carico i dati nel carosello
+carouselData.forEach((item, index) =>{
+
+    //Creo un contenitore e aggiungo la slide principale
+    const carouselItem = document.createElement('div');
+    carouselItem.classList.add('carouselItem')
+
+    //versione compatta di: if(index=activeIndex){d-block}else{d-none}
+    //vedo una sola immagine principale in base alla sua posizione nell'array
+    carouselItem.style.display = index === currentIndex ? 'block' : 'none';
+
+    //creo effettivamente l'immagine centrale
+    const img = document.createElement('img');
+    img.src = item.url;
+    img.alt = item.title;
+
+    //Appendo l'immagine centrale nel div
+    carouselItem.appendChild(img);
+
+    //Appendo il div così da visualizzare il tutto
+    carouselContainer.appendChild(carouselItem);
+
+    //Ripeto il procedimento per creare le icone (finchè non ho riletto i bonus avevo rimosso il termine Miniature dalla mia testa)
+    const iconItem = document.createElement('div');
+    iconItem.classList.add('img-selector');
+
+    //creo un div e inserisco le miniature
+    const iconImg = document.createElement('img');
+    iconImg.src = item.url;
+    iconImg.alt = item.title;
+    iconItem.appendChild(iconImg);
+    iconContainer.appendChild(iconItem);
+  });
+
+
+  prevButton.addEventListener('click', function () {
+    // Cambio l'indice per visualizzare l'immagine giusta
+    currentIndex = (currentIndex - 1 + carouselData.length) % carouselData.length;
+
+    // Nascondo tutte le altre immagini
+    const allImg = document.querySelectorAll('.carouselItem');
+    allImg.forEach((image, index) => {
+        image.style.display = index === currentIndex ? 'block' : 'none';
+    });
+});
+
+nextButton.addEventListener('click', function () {
+    currentIndex = (currentIndex + 1) % carouselData.length;
+
+    const allImg = document.querySelectorAll('.carouselItem');
+    allImg.forEach((image, index) => {
+        image.style.display = index === currentIndex ? 'block' : 'none';
+    });
+});
+
+
 
 
