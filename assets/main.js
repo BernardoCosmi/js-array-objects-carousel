@@ -1,25 +1,53 @@
-let input = parseInt(prompt("Digita la quantità di nomi e cognomi da inserire:"));
-let nomi = [];
-let cognomi = [];
-const result = document.querySelector('h2')
+/*Dato un array di oggetti letterali con:
+ - url dell’immagine
+ - titolo
+ - descrizione
+Creare un carosello come nella foto allegata.
+Milestone 0:
+Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
+Milestone 1:
+Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
+Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+Milestone 2:
+Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso destra, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso sinistra.
+BONUS 1
+Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
+BONUS 2:
+Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
+BONUS 3:
+Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.*/
 
-for(let y=0; y < input; y++){
-    let name = prompt("Inserire " + input + " nomi, premendo invio per ognuno di essi")
-    nomi.push(name)
-}
-for(let y=0; y < input; y++){
-    let surname = prompt("Inserire " + input + " cognomi, premendo invio per ognuno di essi")
-    cognomi.push(surname)
-}
+const carouselData = [
+    {
+      url: './img/AOT1.jpg',
+      title: 'Attack On Titan',
+      description: 'Captain Levi from Attack on Titan',
+    },
+    {
+      url: './img/AOT2.png',
+      title: 'Attack On Titan',
+      description: 'Eren Jaeger from Attack on Titan',
+    },
+    {
+      url: './img/DN2.jpg',
+      title: 'Death Note',
+      description: 'Light Yagami from Death Note',
+    },
+    {
+      url: './img/JK2.jpg',
+      title: 'Jujutsu Kaisen',
+      description: 'Satoru Gojo from Jujutsu Kaisen',
+    },
+    {
+      url: './img/SAO2.jpg',
+      title: 'Sword Art Online',
+      description: 'Kirito from Sword Art Online',
+    },
+    {
+      url: './img/TG2.jpg',
+      title: 'Tokyo Ghoul',
+      description: 'Ken Kaneki from Tokyo Ghoul',
+    },
+  ];
 
-let nomiCombinati = [];
-for (let i = 0; i < input; i++) {
-    let nomeCasuale = nomi[Math.floor(Math.random() * nomi.length)];
-    let cognomeCasuale = cognomi[Math.floor(Math.random() * cognomi.length)];
-    nomiCombinati.push(`${nomeCasuale} ${cognomeCasuale}`);
-}
-console.log(nomi)
-console.log(cognomi)
-console.log("Nomi combinati casuali:", nomiCombinati);
-result.innerHTML = "Nomi combinati casuali: " + nomiCombinati.join(", ");
 

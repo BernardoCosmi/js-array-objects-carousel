@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+#carousel-container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  #carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    transition: transform 0.5s ease-in-out;
+  }
+  #carouselIcon{
+    display: flex;
+    gap: 10px;
+  }
+  .img-selector{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .img-selector img{
+    max-width: 100px;
+  }
+  #button-container button{
+    margin: 0px 10px 10px;
+    padding: 5px;
+  }
+  .carouselItem img{
+    width: 40vw;
+    min-width: 300px;
+  }
