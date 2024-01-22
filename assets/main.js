@@ -131,15 +131,41 @@ var autoplayInterval = setInterval(function () {
     const allImages = document.querySelectorAll('.carouselItem');
     allImages.forEach((image, index) => {
       image.style.display = index === currentIndex ? 'block' : 'none';
+      console.log('Immagine corrente in posizione:' + currentIndex)
     });
+    
   }, 3000);
 
 //ANCHOR Stop Button
 const stopButtonHTML=document.getElementById('stopButton')
 stopButtonHTML.addEventListener('click', function() {
   clearInterval(autoplayInterval)
+  clearInterval(invertedAutoplay)
 });
 
+//ANCHOR Invert autoplay butto
+const invertButtonHTML=document.getElementById('invertButton');
+var invertedAutoplay
 
+invertButtonHTML.addEventListener('click', function() {
+  clearInterval(autoplayInterval)
 
+  invertedAutoplay = setInterval(function() {
+    const allImages = document.querySelectorAll('.carouselItem');
+    
+    if(currentIndex===0){
+      allImages.forEach((image, index) => {
+        image.style.display = index === currentIndex ? 'block' : 'none';
+      });
+      console.log('Immagine corrente in posizione:' + currentIndex)
+      currentIndex = carouselData.length - 1
+    }else{
+      allImages.forEach((image, index) => {
+        image.style.display = index === currentIndex ? 'block' : 'none';
+      });
+      console.log('Immagine corrente in posizione:' + currentIndex)
+      currentIndex--
+    }  
+  }, 3000)
+})
 
