@@ -102,6 +102,7 @@ carouselData.forEach((item, index) =>{
     iconImg.alt = item.title;
     iconItem.appendChild(iconImg);
     iconContainer.appendChild(iconItem);
+<<<<<<< HEAD
     console.log(iconImg)
   
   //ANCHOR Funzione di apertura da miniature
@@ -116,6 +117,15 @@ carouselData.forEach((item, index) =>{
     iconImg.classList.add('active');
 
     currentIndex=index;
+=======
+    console.log(iconImg.src)
+
+  
+  //ANCHOR Funzione di apertura da miniature
+  iconItem.addEventListener('click', function () {
+    currentIndex=index;
+    
+>>>>>>> 8b91b36042781fac8cf6dbf9c49b040b12a5e66c
     const allImages = document.querySelectorAll('.carouselItem');
     allImages.forEach((image, i) => {
       image.style.display = i === index ? 'block' : 'none';
