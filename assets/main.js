@@ -54,8 +54,8 @@ const carouselData = [
 //Dichiaro anche altre variabili che potrebbero tornarmi utili
 const carouselContainer = document.getElementById('carousel');
 const iconContainer = document.getElementById('carouselIcon');
-const prevButton = document.getElementById('prevButton');
-const nextButton = document.getElementById('nextButton');
+const prevButtonHTML = document.getElementById('prevButton');
+const nextButtonHTML = document.getElementById('nextButton');
 
 let currentIndex=0;
 
@@ -102,9 +102,28 @@ carouselData.forEach((item, index) =>{
     iconImg.alt = item.title;
     iconItem.appendChild(iconImg);
     iconContainer.appendChild(iconItem);
-  });
+    console.log(iconImg)
+  
+  //ANCHOR Funzione di apertura da miniature
+  iconItem.addEventListener('click', function () {
 
-  prevButton.addEventListener('click', function () {
+    const allIcons = document.querySelectorAll('.img-selector img');
+    allIcons.forEach((icon) => {
+      icon.classList.remove('active');
+    });
+  
+    // Aggiungo la classe 'active' solo all'icona corrente
+    iconImg.classList.add('active');
+
+    currentIndex=index;
+    const allImages = document.querySelectorAll('.carouselItem');
+    allImages.forEach((image, i) => {
+      image.style.display = i === index ? 'block' : 'none';
+    });
+  })
+});
+
+  prevButtonHTML.addEventListener('click', function () {
     // Cambio l'indice per visualizzare l'immagine giusta, facendo in modo che rimanga sempre ni limiti dell'array
     currentIndex = (currentIndex - 1 + carouselData.length) % carouselData.length;
 
@@ -115,7 +134,7 @@ carouselData.forEach((item, index) =>{
     });
 });
 
-nextButton.addEventListener('click', function () {
+nextButtonHTML.addEventListener('click', function () {
     currentIndex = (currentIndex + 1) % carouselData.length;
 
     const allImg = document.querySelectorAll('.carouselItem');
@@ -125,15 +144,47 @@ nextButton.addEventListener('click', function () {
 });
 
 //ANCHOR Funzione di autoscorrimento
-setInterval(function () {
+var autoplayInterval = setInterval(function () {
     currentIndex = (currentIndex + 1) % carouselData.length;
 
     const allImages = document.querySelectorAll('.carouselItem');
     allImages.forEach((image, index) => {
       image.style.display = index === currentIndex ? 'block' : 'none';
+      console.log('Immagine corrente in posizione:' + currentIndex)
     });
+    
   }, 3000);
 
+//ANCHOR Stop Button
+const stopButtonHTML=document.getElementById('stopButton')
+stopButtonHTML.addEventListener('click', function() {
+  clearInterval(autoplayInterval)
+  clearInterval(invertedAutoplay)
+});
 
+//ANCHOR Invert autoplay butto
+const invertButtonHTML=document.getElementById('invertButton');
+var invertedAutoplay
 
+invertButtonHTML.addEventListener('click', function() {
+  clearInterval(autoplayInterval)
+
+  invertedAutoplay = setInterval(function() {
+    const allImages = document.querySelectorAll('.carouselItem');
+
+    if(currentIndex===0){
+      allImages.forEach((image, index) => {
+        image.style.display = index === currentIndex ? 'block' : 'none';
+      });
+      console.log('Immagine corrente in posizione:' + currentIndex)
+      currentIndex = carouselData.length - 1
+    }else{
+      allImages.forEach((image, index) => {
+        image.style.display = index === currentIndex ? 'block' : 'none';
+      });
+      console.log('Immagine corrente in posizione:' + currentIndex)
+      currentIndex--
+    }  
+  }, 3000)
+})
 
